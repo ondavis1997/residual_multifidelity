@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Tue Mar  5 08:36:38 2024
-
-@author: owendavis
-"""
 
 import numpy as np
 
@@ -48,6 +43,5 @@ plt.xlabel('Number of HF Samples', fontsize=14)
 plt.ylabel(r'$MSE$', fontsize = 18)
 plt.yscale('log')
 plt.legend()
-#plt.savefig('OND_numerical_example.pdf', format = 'pdf', bbox_inches = 'tight')
 plt.show()
 plt.close()
