@@ -92,7 +92,7 @@ for w, d in width_depth:
         print(f'working on {num_samples} samples')
         
         # Load training, testing, and validation sets
-        train_data = DataLoader(TrainData(f'../training_data/DNLNN_training_data_{num_samples}.txt'), batch_size = b_size, shuffle=False)
+        train_data = DataLoader(TrainData(f'../training_data/MFNN_training_data_{num_samples}.txt'), batch_size = b_size, shuffle=False)
         test_data = np.loadtxt(f'../training_data/MF_test_data_{num_samples}.txt',dtype=float)
         val_data = np.loadtxt(f'../training_data/MF_validation_data_{num_samples}.txt', dtype=float)
         
@@ -177,7 +177,7 @@ for w, d in width_depth:
         error_data[j,3] = std_dev
           
     
-    pickle.dump(ensemble, open(f'ensemble_MFNN_width_{w}_depth_{d}.pkl', 'wb'))
+    pickle.dump(ensemble, open(f'../post_process_and_plots/ensemble_MFNN_width_{w}_depth_{d}.pkl', 'wb'))
 
 
 

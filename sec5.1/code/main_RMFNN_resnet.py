@@ -185,7 +185,7 @@ for w, d in width_depth:
         error_data[j,3] = std_dev  
     
 
-    pickle.dump(ensemble, open(f'ensemble_RMFNN_width_{w}_depth_{d}.pkl','wb'))
+    pickle.dump(ensemble, open(f'../post_process_and_plots/ensemble_RMFNN_width_{w}_depth_{d}.pkl','wb'))
 
 
 
