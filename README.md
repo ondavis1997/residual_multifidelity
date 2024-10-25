@@ -11,7 +11,7 @@ sec5.1/code
 
 	- run time can very long (up to several days depending on available computational resources)
  
-sec5.1/post_processing_and_plots
+sec5.1/post_process_and_plots
 
 	-run pp.py
 
@@ -24,7 +24,7 @@ sec5.2/code
 
 	- runtime can be very long (up to days depending on available computational resources)
 
-sec5.2/post_processing_and_plots
+sec5.2/post_process_and_plots
 
 	-run pp.py
 
@@ -33,7 +33,7 @@ sec5.3/code
 
 	- run RMFNN_ODE_parallel.py  # this is an mpi program (run time can be very long; days-weeks depending on computational resources)
 
-sec5.3/post_processing_and_plots
+sec5.3/post_process_and_plots
 
 	-run pp.py
 
@@ -45,7 +45,7 @@ sec5.4/code
 
 	- exact timings for training and evaluation will depend on computing architecture
 
-sec5.3/post_processing_and_plots
+sec5.3/post_process_and_plots
 
 	-run pp.py
 
