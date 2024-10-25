@@ -8,44 +8,48 @@ matplotlib.rcParams['mathtext.fontset'] = 'cm'
 matplotlib.rcParams['font.family'] = 'STIXGeneral'
 # open results files
 
-with open("ensemble_RMFNN_width_7_depth_7.pkl", "rb") as file:
+with open("ensemble_RMFNN_width_10_depth_2.pkl", "rb") as file:
     RMFNN_data = pickle.load(file)
 
-with open("ensemble_MFNN_width_7_depth_7.pkl", "rb") as file:
-    MFNN_data = pickle.load(file)
-
-with open("ensemble_HFNN_width_7_depth_7.pkl", "rb") as file:
-    HFNN_data = pickle.load(file)
+with open("ensemble_DiscrepNN_width_10_depth_2.pkl", "rb") as file:
+    RLNN_data = pickle.load(file)
 
 
 
-num_samples = [250, 500, 1000, 2000, 3000, 5000, 7000, 9000, 11000, 13000, 15000, 17000]
+num_samples = [4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48]
 
-data_sources = [RMFNN_data,  MFNN_data, HFNN_data]
-labels = ["RMFNN ResNet", "MFNN ResNet", "HFNN ResNet"]
-colors = ["red", "green", "blue", "gray"]
-markers = ["o", "x", "^", "s"]
 
-data_source_and_plot_params = list(zip(data_sources, labels, colors, markers))
+data_sources = [RMFNN_data, RLNN_data]
+labels = ["RMFNN ResNet", "DiscrepNN ResNet"]
+labels_mean = ["RMFNN ResNet mean", "DiscrepNN ResNet mean"]
+colors = ["red", "blue"]
+markers = ["o", "s"]
 
-for data, l, col, mark in data_source_and_plot_params:
+
+data_source_and_plot_params = list(zip(data_sources, labels, labels_mean, colors, markers))
+
+for data, l, l_mean, col, mark in data_source_and_plot_params:
     for n in num_samples:
-        if n == 250:
-            plt.scatter(np.array([n]), np.mean(np.sort(data[str(n)])), color = col, marker = mark, label = l)
+        if n == 4:
+            plt.scatter(np.array([n]), np.mean(np.sort(data[str(n)])), facecolors = col, edgecolors = 'k', marker = mark, label = l_mean)
         else:
-            plt.scatter(np.array([n]), np.mean(np.sort(data[str(n)])), color = col, marker = mark)
+            plt.scatter(np.array([n]), np.mean(np.sort(data[str(n)])), facecolors = col, edgecolors='k', marker = mark)
         
         for i in range(20):
-            plt.scatter(np.array([n]), data[str(n)][i], color = col, marker =  mark, alpha=0.1)
+            if i==1 and n==4:
+                plt.scatter(np.array([n]), data[str(n)][i], color = col, s=6, marker =  mark, alpha=0.2, label = l)
+            else:
+                plt.scatter(np.array([n]), data[str(n)][i], color = col, s=6,  marker =  mark, alpha=0.2)
 
-plt.legend(loc="lower left")
+plt.legend(loc='upper center', bbox_to_anchor=(0.5, 1.15),
+          ncol=2, fancybox=True, shadow=False)
 
 plt.ylabel(r"$\varepsilon_{MSE}$", fontsize=12)
 plt.xlabel("Number of HF Samples", fontsize=12)
 plt.yscale("log")
 plt.xscale("log")
-plt.xticks([250,500,1000, 2000, 3000,5000, 7000, 11000, 17000], ["250", "500", "1000", "2000", "3000", "5000", "7000", "11000", "17000"])
-plt.savefig("RMFNN_MFNN_HFNN_comparison.pdf", format="pdf", bbox_inches="tight")
+plt.xticks([4,8,12,16,20,24,28,32,36,40,44,48], ["4", "8", "12", "16", "20", "24", "28", "32", "36", "40", "44", "48"])
+plt.savefig("RMFNN_DiscrepNN_comparison.pdf", format="pdf", bbox_inches="tight")
 
 plt.show()
 plt.close()

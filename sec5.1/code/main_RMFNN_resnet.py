@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Fri Oct 14 20:06:51 2022
 
 @author: ondavis
 """
@@ -54,9 +53,9 @@ def convert_np_2D(X):
 
 
 
-width_depth = [(7,7)]
-sample_numbers = [250,500,1000,2000,3000,5000,7000,9000,11000,13000,15000,17000]
-batch_sizes = [128,128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128]
+width_depth = [(10,2)]
+sample_numbers = [4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48] # 45, 50, 55, 60, 65, 70, 75, 80]
+batch_sizes = [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]
 params = list(zip(sample_numbers,batch_sizes))
 seeds = [53, 101, 151, 203, 257, 305, 343, 413, 467, 501, 539, 695, 721, 799, 831, 893, 915, 953, 1033, 1137]
 
@@ -82,7 +81,7 @@ for w, d in width_depth:
     
     print(f'working on width ={w}, depth ={d}')
     num_blocks = int((d-3)/2)
-    model = DenseResnet(in_features=5, out_features=1, num_res_blocks = num_blocks, width = w)
+    model = DenseResnet(in_features=2, out_features=1, num_res_blocks = num_blocks, width = w)
     error_data = np.zeros((len(sample_numbers),4))
         
         
@@ -121,14 +120,14 @@ for w, d in width_depth:
             torch.manual_seed(seed)
             # Set training parameters 
             learning_rate = 1e-2
-            reg_weight = 1e-8
+            reg_weight = 1e-3
             
             model.apply(initialize_weights)
             optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate, weight_decay=reg_weight)
             loss_fn = torch.nn.MSELoss(reduction ='mean')
             scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='min',
             factor=0.5, patience=10, threshold=1e-5, threshold_mode='abs', verbose=False)
-            stop_criteria = EarlyStop(patience = 100, delta = 0.0000025)
+            stop_criteria = EarlyStop(patience = 100, delta = 0.00000025)
     
             # Set number of epochs
     
