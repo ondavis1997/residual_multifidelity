@@ -39,6 +39,8 @@ sec5.3/post_process_and_plots
 
 	- exact timings for training and evaluation will depend on computing architecture
 
+ ##################################################################################################################################
+
 sec5.4/code
 
 	- run RMFNN_PDE_parallel.py  # this is an mpi program (run time can be very long; days-weeks depending on computational resources)
